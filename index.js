@@ -2,6 +2,7 @@ const fs = require('fs');
 const express = require('express');
 const https = require('https');
 const cors = require('cors');
+require('dotenv').config();
 
 const key = fs.readFileSync('./server.key');
 
@@ -50,6 +51,8 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'Server ready' });
 });
 
-server.listen(4080, () => {
-  console.log('Server is listening on port 4080 ....');
+const PORT = process.env.PORT || 4080;
+
+server.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT} ....`);
 });
