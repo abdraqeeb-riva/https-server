@@ -17,7 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
   options['cert'] = cert;
 }
 
-const server = https.createServer(options, app);
+// const server = https.createServer(options, app);
 
 app.use(function (req, res, next) {
   // Request methods you wish to allow
@@ -60,6 +60,6 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 4080;
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT} ....`);
 });
