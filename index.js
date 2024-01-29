@@ -1,23 +1,11 @@
-const fs = require('fs');
 const express = require('express');
-const https = require('https');
-const cors = require('cors');
+
 require('dotenv').config();
-
-const key = fs.readFileSync('./server.key');
-
-const cert = fs.readFileSync('./server.crt');
 
 const app = express();
 
-const options = {};
-
-if (process.env.NODE_ENV !== 'production') {
-  options['key'] = key;
-  options['cert'] = cert;
-}
-
-// const server = https.createServer(options, app);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(function (req, res, next) {
   // Request methods you wish to allow
@@ -43,8 +31,6 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   next();
 });
-
-app.use(cors());
 
 app.get('/check', (req, res) => {
   res.status(200).json({ data: 'Sample' });
