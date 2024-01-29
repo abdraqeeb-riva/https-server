@@ -10,7 +10,14 @@ const cert = fs.readFileSync('./server.crt');
 
 const app = express();
 
-const server = https.createServer({ key: key, cert: cert }, app);
+const options = {};
+
+if (process.env.NODE_ENV !== 'production') {
+  options['key'] = key;
+  options['cert'] = cert;
+}
+
+const server = https.createServer(options, app);
 
 app.use(function (req, res, next) {
   // Request methods you wish to allow
